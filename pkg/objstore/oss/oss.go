@@ -106,18 +106,30 @@ func (b *Bucket) Iter(ctx context.Context, dir string, f func(string) error) err
 	if dir != "" {
 		dir = strings.TrimSuffix(dir, dirDelim) + dirDelim
 	}
-	lor, err := b.bkt.ListObjects(oss.Prefix(dir), oss.Delimiter("/"))
-	if err != nil {
-		return err
-	}
-	for _, object := range lor.Objects {
-		if err := f(object.Key); err != nil {
+	marker := oss.Marker("")
+	for {
+		lor, err := b.bkt.ListObjects(oss.MaxKeys(1000), marker, oss.Prefix(dir), oss.Delimiter("/"))
+		if err != nil {
 			return err
 		}
-	}
-	for _, object := range lor.CommonPrefixes {
-		if err := f(object); err != nil {
-			return err
+		var listNames []string
+		for _, object := range lor.Objects {
+			listNames = append(listNames, object.Key)
+		}
+
+		for _, prefix := range lor.CommonPrefixes {
+			listNames = append(listNames, prefix)
+		}
+
+		for _, name := range listNames {
+			if err := f(name); err != nil {
+				return err
+			}
+		}
+
+		marker = oss.Marker(lor.NextMarker)
+		if !lor.IsTruncated {
+			break
 		}
 	}
 	return nil
