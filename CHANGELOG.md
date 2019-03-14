@@ -11,6 +11,30 @@ We use *breaking* word for marking changes that are not backward compatible (rel
 
 ## Unreleased
 
+### Added
+- [#811](https://github.com/improbable-eng/thanos/pull/811) Remote write receiver
+
+## [v0.3.2](https://github.com/improbable-eng/thanos/releases/tag/v0.3.2) - 2019.03.04
+
+### Added
+- [#851](https://github.com/improbable-eng/thanos/pull/851) New read API endpoint for api/v1/rules and api/v1/alerts.
+- [#873](https://github.com/improbable-eng/thanos/pull/873) Store: fix set index cache LRU
+
+:warning: **WARING** :warning: #873 fix fixes actual handling of `index-cache-size`. Handling of limit for this cache was 
+broken so it was unbounded all the time. From this release actual value matters and is extremely low by default. To "revert"
+the old behaviour (no boundary), use a large enough value.
+
+### Fixed
+- [#833](https://github.com/improbable-eng/thanos/issues/833) Store Gateway matcher regression for intersecting with empty posting.
+- [#867](https://github.com/improbable-eng/thanos/pull/867) Fixed race condition in sidecare between reloader and shipper.
+
+## [v0.3.1](https://github.com/improbable-eng/thanos/releases/tag/v0.3.1) - 2019.02.18
+
+### Fixed
+- [#829](https://github.com/improbable-eng/thanos/issues/829) Store Gateway crashing due to `slice bounds out of range`.
+- [#834](https://github.com/improbable-eng/thanos/issues/834) Store Gateway matcher regression for `<>` `!=`.
+
+
 ## [v0.3.0](https://github.com/improbable-eng/thanos/releases/tag/v0.3.0) - 2019.02.08
 
 ### Added
