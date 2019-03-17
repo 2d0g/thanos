@@ -69,6 +69,14 @@
   revision = "2efee857e7cfd4f3d0138cc3cbb1b4966962b93a"
 
 [[projects]]
+  digest = "1:4a215881dea86857217e8fe117ae8ed36b168d7655a9178f2f6e9f8bcec7ab83"
+  name = "github.com/aliyun/aliyun-oss-go-sdk"
+  packages = ["oss"]
+  pruneopts = ""
+  revision = "86c17b95fcd5db33628a61e492fb4a1a937d5906"
+  version = "1.9.5"
+
+[[projects]]
   branch = "master"
   digest = "1:d64110a78451e373c5a952d2625323dbbe3bfe41c67f9652ea9668a6ceb4f645"
   name = "github.com/armon/go-metrics"
@@ -197,6 +205,14 @@
   packages = ["."]
   pruneopts = ""
   revision = "2e65f85255dbc3072edf28d6b5b8efc472979f5a"
+
+[[projects]]
+  digest = "1:cea4aa2038169ee558bf507d5ea02c94ca85bcca28a4c7bb99fd59b31e43a686"
+  name = "github.com/google/go-querystring"
+  packages = ["query"]
+  pruneopts = ""
+  revision = "44c6ddd0a2342c386950e880b658017258da92fc"
+  version = "v1.0.0"
 
 [[projects]]
   digest = "1:e097a364f4e8d8d91b9b9eeafb992d3796a41fde3eb548c1a87eb9d9f60725cf"
@@ -366,6 +382,22 @@
   version = "v1.0.0"
 
 [[projects]]
+  digest = "1:484d7b3ea990153489735f4810f74b50c63ea16ba58e2fc34ac88c2b0d80f584"
+  name = "github.com/mozillazg/go-cos"
+  packages = ["."]
+  pruneopts = ""
+  revision = "99eb77820590d3f93902fd18244c87d635bfc3e2"
+  version = "v0.11.0"
+
+[[projects]]
+  digest = "1:b09858acd58e0873236c7b96903e3ec4e238d5de644c08bd8e712fa2d3d51ad2"
+  name = "github.com/mozillazg/go-httpheader"
+  packages = ["."]
+  pruneopts = ""
+  revision = "61f2392c3317b60616c9dcb10d0a4cfef131fe62"
+  version = "v0.2.1"
+
+[[projects]]
   branch = "master"
   digest = "1:3adc46876d4d0e4d5bbcfcc44c2116b95d7a5c966e2ee92a219488547fd453f2"
   name = "github.com/nightlyone/lockfile"
@@ -427,6 +459,7 @@
     "prometheus",
     "prometheus/internal",
     "prometheus/promhttp",
+    "prometheus/testutil",
   ]
   pruneopts = ""
   revision = "e637cec7d9c8990247098639ebc6d43dd34ddd49"
@@ -640,6 +673,14 @@
 
 [[projects]]
   branch = "master"
+  digest = "1:9522af4be529c108010f95b05f1022cb872f2b9ff8b101080f554245673466e1"
+  name = "golang.org/x/time"
+  packages = ["rate"]
+  pruneopts = ""
+  revision = "9d24e82272b4f38b78bc8cff74fa936d31ccd8ef"
+
+[[projects]]
+  branch = "master"
   digest = "1:7e248912e9ce5218a30a9fa1b4ed575e474430e178a24af34ecb2373dbb93752"
   name = "google.golang.org/api"
   packages = [
@@ -761,6 +802,7 @@
     "cloud.google.com/go/trace/apiv1",
     "github.com/Azure/azure-storage-blob-go/azblob",
     "github.com/NYTimes/gziphandler",
+    "github.com/aliyun/aliyun-oss-go-sdk/oss",
     "github.com/armon/go-metrics",
     "github.com/armon/go-metrics/prometheus",
     "github.com/fatih/structtag",
@@ -787,6 +829,7 @@
     "github.com/minio/minio-go",
     "github.com/minio/minio-go/pkg/credentials",
     "github.com/minio/minio-go/pkg/encrypt",
+    "github.com/mozillazg/go-cos",
     "github.com/oklog/run",
     "github.com/oklog/ulid",
     "github.com/opentracing/basictracer-go",
@@ -795,6 +838,7 @@
     "github.com/pkg/errors",
     "github.com/prometheus/client_golang/prometheus",
     "github.com/prometheus/client_golang/prometheus/promhttp",
+    "github.com/prometheus/client_golang/prometheus/testutil",
     "github.com/prometheus/common/model",
     "github.com/prometheus/common/route",
     "github.com/prometheus/common/version",

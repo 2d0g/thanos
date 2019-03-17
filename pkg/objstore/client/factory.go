@@ -24,6 +24,7 @@ const (
 	S3    ObjProvider = "S3"
 	AZURE ObjProvider = "AZURE"
 	SWIFT ObjProvider = "SWIFT"
+	OSS   ObjProvider = "OSS"
 )
 
 type BucketConfig struct {
@@ -61,6 +62,8 @@ func NewBucket(logger log.Logger, confContentYaml []byte, reg prometheus.Registe
 		bucket, err = azure.NewBucket(logger, config, component)
 	case string(SWIFT):
 		bucket, err = swift.NewContainer(logger, config)
+	case string(OSS):
+		bucket, err = s3.NewBucket(logger, config, component)
 	default:
 		return nil, errors.Errorf("bucket with type %s is not supported", bucketConf.Type)
 	}

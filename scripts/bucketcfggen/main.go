@@ -14,6 +14,7 @@ import (
 	"github.com/improbable-eng/thanos/pkg/objstore/azure"
 	"github.com/improbable-eng/thanos/pkg/objstore/client"
 	"github.com/improbable-eng/thanos/pkg/objstore/gcs"
+	"github.com/improbable-eng/thanos/pkg/objstore/oss"
 	"github.com/improbable-eng/thanos/pkg/objstore/s3"
 	"github.com/pkg/errors"
 	"gopkg.in/alecthomas/kingpin.v2"
@@ -26,6 +27,7 @@ var (
 		client.GCS:   gcs.Config{},
 		client.S3:    s3.Config{},
 		client.SWIFT: azure.Config{},
+		client.OSS:   oss.Config{},
 	}
 )
 
