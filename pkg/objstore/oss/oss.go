@@ -1,6 +1,7 @@
 package oss
 
 import (
+	"bufio"
 	"context"
 	"fmt"
 	"io"
@@ -84,10 +85,53 @@ func (b *Bucket) Name() string {
 
 // Upload the contents of the reader as an object into the bucket.
 func (b *Bucket) Upload(ctx context.Context, name string, r io.Reader) error {
-	err := b.bkt.PutObject(name, r)
+	// create tmp file
+	tmpFilename := "/tmp/thanos.tmp"
+	fo, err := os.Create(tmpFilename)
+	if err != nil {
+		panic(err)
+	}
+	// close fo on exit and check for its returned error
+	defer func() {
+		if err := fo.Close(); err != nil {
+			panic(err)
+		}
+	}()
+	// make a write buffer
+	w := bufio.NewWriter(fo)
+
+	// make a buffer to keep chunks that are read
+	buf := make([]byte, 1024*1024*1024)
+	for {
+		// read a chunk
+		n, err := r.Read(buf)
+		if err != nil && err != io.EOF {
+			panic(err)
+		}
+		if n == 0 {
+			break
+		}
+
+		// write a chunk
+		if _, err := w.Write(buf[:n]); err != nil {
+			panic(err)
+		}
+	}
+
+	if err = w.Flush(); err != nil {
+		panic(err)
+	}
+
+	err = b.bkt.UploadFile(name, tmpFilename, 1024*1024*1024*2)
 	if err != nil {
 		return errors.Wrap(err, "upload oss object")
 	}
+
+	err = os.Remove(tmpFilename)
+	if err != nil {
+		return errors.Wrap(err, "deleted tmp uploadFile")
+	}
+
 	return nil
 }
 
